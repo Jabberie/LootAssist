@@ -1,0 +1,8 @@
+## Interface: 70100
+## Title: Loot Assist
+## Author: Jabberie, Bitingsock
+## Version: Alpha 0.1
+## SavedVariables: LootAssistDefault
+## SavedVariablesPerCharacter: LootAssistChoice
+
+LootAssist.lua
