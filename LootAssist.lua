@@ -77,7 +77,7 @@ function frameEventHandle(self,event,arg1,arg2)
             if GetLootSlotLink(i) then
                 local _,lootName,lootQuantity,_,locked=GetLootSlotInfo(i);
                 if locked then
---                    print(GetLootSlotLink(i))
+                --    print(GetLootSlotLink(i))
                 else
                     lootTable[i]=lootName;
                     if GetLootSlotType(i) == 3 then --non coin currency

@@ -1,8 +1,0 @@
-package-as: LootAssist
-enable-nolib-creation: yes
-
-license-output: LICENSE.txt
-
-ignore:
-    - README.md
-    - .pkgmeta

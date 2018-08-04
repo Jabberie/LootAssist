@@ -1,7 +1,7 @@
-## Interface: 70300
+## Interface: 800001
 ## Title: Loot Assist
 ## Author: Jabberie, Bitingsock
-## Version: Alpha 0.1
+## Version: 2
 ## SavedVariables: LootAssistDefault
 ## SavedVariablesPerCharacter: LootAssistChoice
 
