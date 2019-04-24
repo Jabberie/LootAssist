@@ -124,27 +124,57 @@ function frameEventHandle(self,event,arg1,arg2)
 end
 dummyFrame:SetScript("OnEvent",frameEventHandle);
 ------------------------------------------------------------------------------------------------------------------------
+-- local function initialiseAddon()
+--     print("hello?")
+--     StaticPopupDialogs["This_is_your_first_time_loading_LootAssist"] = {
+--         text = L["This is your first time loading LootAssist.'nDo you want to turn it on:"],
+-- 
+--         button1 = "Account wide",
+--         button2 = "Character Only",
+-- 
+--         OnAccept = function()
+--             SlashCmdList.LOOTASSISTDEFON()
+--             SlashCmdList.LOOTASSISTON()
+--             ReloadUI()
+--         end,
+-- 
+--         OnCancel = function()
+--             SlashCmdList.LOOTASSISTDEFOFF()
+--             SlashCmdList.LOOTASSISTON()
+--         end,
+-- 
+--         showAlert = 1,
+--         timeout = 0,
+--         exclusive = 1,
+--         hideOnEscape = 0,
+--         whileDead = 1,  
+--     }
+-- end
+------------------------------------------------------------------------------------------------------------------------
 
 -- Load up the saved settings
 local MagicFrame=CreateFrame("Frame")
 MagicFrame:RegisterEvent("PLAYER_LOGIN")
 
 MagicFrame:SetScript("OnEvent", function(...)
-    if LootAssistDefault == nil then 
-        LootAssistDefault = 0 -- just to give them a default setting on first log in
-    end
-    if LootAssistChoice == nil then
-        LootAssistChoice = 0 -- just to give them a default setting on first log in
-    end
-
-    if LootAssistDefault == 0 then              -- Default off 
-        if LootAssistChoice == 0 then           -- Per Char off
-            SlashCmdList.LOOTASSISTOFF();
-        else                                    -- Per Char on
-            SlashCmdList.LOOTASSISTON();        
-        end
-    else                                        -- Default on
-        SlashCmdList.LOOTASSISTON();
-    end
+--    if not LootAssistDefault then
+--        print("check1")
+--        initialiseAddon()
+--        LootAssistDefault = 0 -- just to give them a default setting on first log in
+--    end
+--    if not LootAssistChoice then
+--        print("check2")
+--        LootAssistChoice = 0 -- just to give them a default setting on first log in
+--    end
+--
+--    if LootAssistDefault == 0 then              -- Default off 
+--        if LootAssistChoice == 0 then           -- Per Char off
+--            SlashCmdList.LOOTASSISTOFF();
+--        else                                    -- Per Char on
+--            SlashCmdList.LOOTASSISTON();        
+--        end
+--    else                                        -- Default on
+--        SlashCmdList.LOOTASSISTON();
+--    end
 end)
 ------------------------------------------------------------------------------------------------------------------------

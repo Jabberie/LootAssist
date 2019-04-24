@@ -1,4 +1,4 @@
-## Interface: 800001
+## Interface: 80100
 ## Title: Loot Assist
 ## Author: Jabberie, Bitingsock
 ## Version: 2
