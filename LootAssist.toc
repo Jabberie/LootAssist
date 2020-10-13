@@ -1,8 +1,9 @@
-## Interface: 80100
+## Interface: 90001
 ## Title: Loot Assist
 ## Author: Jabberie, Bitingsock
-## Version: 2
+## Version: 3
 ## SavedVariables: LootAssistDefault
 ## SavedVariablesPerCharacter: LootAssistChoice
 
+embeds.xml
 LootAssist.lua
