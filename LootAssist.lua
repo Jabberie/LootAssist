@@ -4,7 +4,7 @@ local CurrencyLoot = {};
 
 LootAssist = LibStub("AceAddon-3.0"):NewAddon("LootAssist","AceConsole-3.0","AceEvent-3.0")
 
-local version = "v3.0"
+local version = "v4.0"
 local LootAssist = LootAssist
 -- local L = LibStub("AceLocale-3.0"):GetLocale("LootAssist",true)
 local debug = false;
