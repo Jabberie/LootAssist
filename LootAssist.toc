@@ -1,7 +1,7 @@
-## Interface: 90002
+## Interface: 100002
 ## Title: Loot Assist
 ## Author: Jabberie, Bitingsock
-## Version: 3
+## Version: 4
 ## SavedVariables: LootAssistDefault
 ## SavedVariablesPerCharacter: LootAssistChoice
 
