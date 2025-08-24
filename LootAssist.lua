@@ -177,7 +177,7 @@ function frameEventHandle(self,event,arg1,arg2)
     end
  -- created the total list of items
     if event == "LOOT_READY" then
-        _,MasterLooter = GetLootMethod() 
+        _,MasterLooter = C_PartyInfo.GetLootMethod() 
         if MasterLooter == 0 then -- If master loot is active, binds the window back to normal
             LootFrame:RegisterEvent("LOOT_OPENED");
             LootFrame:RegisterEvent("LOOT_SLOT_CLEARED");
