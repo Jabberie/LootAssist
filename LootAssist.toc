@@ -1,9 +1,10 @@
-## Interface: 100002
-## Title: Loot Assist
-## Author: Jabberie, Bitingsock
-## Version: 4
+## Interface: 120100, 50504, 20506, 11509
+## Title: LootAssist
+## Notes: Fast, reliable automatic looting.
+## Author: Jabberie
+## Version: @project-version@
+
 ## SavedVariables: LootAssistDefault
 ## SavedVariablesPerCharacter: LootAssistChoice
 
-embeds.xml
-LootAssist.lua
+Core.lua

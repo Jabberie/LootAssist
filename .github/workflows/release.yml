@@ -1,0 +1,60 @@
+name: Build GitHub Release
+
+on:
+  workflow_dispatch:
+
+  push:
+    tags:
+      - '*_release'
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Determine version
+        id: version
+        shell: bash
+        run: |
+          if [[ "${GITHUB_REF_TYPE}" == "tag" ]]; then
+            VERSION="${GITHUB_REF_NAME%_release}"
+          else
+            VERSION="dev"
+          fi
+
+          echo "version=${VERSION}" >> "$GITHUB_OUTPUT"
+
+      - name: Build addon package
+        shell: bash
+        run: |
+          VERSION="${{ steps.version.outputs.version }}"
+
+          mkdir -p dist/LootAssist
+
+          cp Core.lua dist/LootAssist/
+          cp LootAssist.toc dist/LootAssist/
+          cp LICENSE dist/LootAssist/
+
+          sed -i "s/@project-version@/${VERSION}/g" dist/LootAssist/LootAssist.toc
+
+          cd dist
+          zip -r LootAssist.zip LootAssist
+
+      - name: Upload workflow artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: LootAssist-${{ steps.version.outputs.version }}
+          path: dist/LootAssist.zip
+
+      - name: Create GitHub release
+        if: github.ref_type == 'tag'
+        uses: softprops/action-gh-release@v2
+        with:
+          files: dist/LootAssist.zip
+          generate_release_notes: true

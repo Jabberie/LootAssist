@@ -1,0 +1,10 @@
+package-as: LootAssist
+
+ignore:
+  - .github
+  - .gitignore
+  - .gitattributes
+  - README.md
+
+manual-changelog: CHANGELOG.md
+license-output: LICENSE
