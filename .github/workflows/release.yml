@@ -17,44 +17,42 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
-      - name: Determine version
+      - name: Get release version
         id: version
         shell: bash
         run: |
-          if [[ "${GITHUB_REF_TYPE}" == "tag" ]]; then
-            VERSION="${GITHUB_REF_NAME%_release}"
-          else
-            VERSION="dev"
-          fi
+          TAG="${GITHUB_REF_NAME}"
+          VERSION="${TAG%_release}"
 
-          echo "version=${VERSION}" >> "$GITHUB_OUTPUT"
+          echo "tag=$TAG" >> "$GITHUB_OUTPUT"
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
 
       - name: Build addon package
         shell: bash
         run: |
           VERSION="${{ steps.version.outputs.version }}"
 
-          mkdir -p dist/LootAssist
+          mkdir -p package/LootAssist
 
-          cp Core.lua dist/LootAssist/
-          cp LootAssist.toc dist/LootAssist/
-          cp LICENSE dist/LootAssist/
+          rsync -av ./ package/LootAssist/ \
+            --exclude='.git' \
+            --exclude='.github' \
+            --exclude='package' \
+            --exclude='*.zip'
 
-          sed -i "s/@project-version@/${VERSION}/g" dist/LootAssist/LootAssist.toc
+          sed -i "s/@project-version@/$VERSION/g" \
+            package/LootAssist/LootAssist.toc
 
-          cd dist
-          zip -r LootAssist.zip LootAssist
+          cd package
+          zip -r "../LootAssist-${VERSION}.zip" LootAssist
 
-      - name: Upload workflow artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: LootAssist-${{ steps.version.outputs.version }}
-          path: dist/LootAssist.zip
-
-      - name: Create GitHub release
-        if: github.ref_type == 'tag'
+      - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
         with:
-          files: dist/LootAssist.zip
+          tag_name: ${{ steps.version.outputs.tag }}
+          name: LootAssist ${{ steps.version.outputs.version }}
+          files: LootAssist-${{ steps.version.outputs.version }}.zip
           generate_release_notes: true
