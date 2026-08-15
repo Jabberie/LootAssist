@@ -2,7 +2,7 @@
 ## Title: LootAssist
 ## Notes: Fast, reliable automatic looting.
 ## Author: Jabberie
-## Version: @project-version@
+## Version: 12.002_release
 
 ## SavedVariables: LootAssistDefault
 ## SavedVariablesPerCharacter: LootAssistChoice

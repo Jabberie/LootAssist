@@ -47,17 +47,48 @@ local function IsMasterLoot()
 end
 
 
+local blizzardLootFrameEvents = nil
+
+local function CaptureBlizzardLootFrameEvents()
+    if blizzardLootFrameEvents or not LootFrame then
+        return
+    end
+
+    blizzardLootFrameEvents = {
+        LOOT_OPENED = LootFrame:IsEventRegistered("LOOT_OPENED"),
+        LOOT_READY = LootFrame:IsEventRegistered("LOOT_READY"),
+        LOOT_SLOT_CLEARED = LootFrame:IsEventRegistered("LOOT_SLOT_CLEARED"),
+    }
+end
+
+
 local function SetBlizzardLootFrameEnabled(state)
     if not LootFrame then
         return
     end
 
+    CaptureBlizzardLootFrameEvents()
+
     if state then
-        LootFrame:RegisterEvent("LOOT_OPENED")
-        LootFrame:RegisterEvent("LOOT_SLOT_CLEARED")
+        -- Restore only the events Blizzard originally owned.
+        for event, wasRegistered in pairs(blizzardLootFrameEvents) do
+            if wasRegistered then
+                LootFrame:RegisterEvent(event)
+            else
+                LootFrame:UnregisterEvent(event)
+            end
+        end
     else
+        -- Retail can drive the loot frame from LOOT_READY as well as
+        -- LOOT_OPENED. Suppress both so Blizzard never opens its frame
+        -- while LootAssist is handling the loot interaction.
         LootFrame:UnregisterEvent("LOOT_OPENED")
+        LootFrame:UnregisterEvent("LOOT_READY")
         LootFrame:UnregisterEvent("LOOT_SLOT_CLEARED")
+
+        if LootFrame:IsShown() then
+            HideUIPanel(LootFrame)
+        end
     end
 end
 

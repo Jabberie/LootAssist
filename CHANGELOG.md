@@ -2,6 +2,12 @@
 
 All notable changes to LootAssist will be documented here.
 
+## 12.002
+
+### Fixed
+- Fixed Blizzard's loot window remaining visible while LootAssist is enabled.
+- LootAssist now suppresses both `LOOT_OPENED` and `LOOT_READY` on Blizzard's LootFrame and restores Blizzard's original event registrations when needed.
+
 ## 12.001
 
 ### Added
